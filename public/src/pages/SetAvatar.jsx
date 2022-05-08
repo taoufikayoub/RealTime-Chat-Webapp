@@ -32,8 +32,6 @@ const SetAvatar = () => {
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: avatars[selectedAvatar],
       });
-      console.log(data);
-
       if (data.isSet) {
         user.isAvatarImageSet = true;
         user.avatarImage = data.image;
@@ -60,7 +58,7 @@ const SetAvatar = () => {
         const image = await axios.get(
           `${api}/${Math.round(Math.random() * 1000)}`
         );
-        const buffer = new Buffer(image.data);
+        const buffer = Buffer.from(image.data);
         data.push(buffer.toString("base64"));
       }
       setAvatars(data);
